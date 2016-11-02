@@ -17,5 +17,5 @@ public interface IDAO<T> {
     public void excluir(T t);
     public void atualizar(T t);
     public List<T> listar();
-    public T pesquisar(T t);
+    public T pesquisar(Long id);
 }

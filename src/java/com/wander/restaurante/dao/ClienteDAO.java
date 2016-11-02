@@ -35,8 +35,8 @@ public class ClienteDAO<Cliente> extends AbsDAO<Cliente> {
     }
 
     @Override
-    public Cliente pesquisar(Cliente t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente pesquisar(Long id) {
+        return null;
     }
     
 }

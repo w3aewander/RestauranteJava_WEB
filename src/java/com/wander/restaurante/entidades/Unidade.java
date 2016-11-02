@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -21,11 +22,17 @@ import javax.persistence.Id;
 @Table(name="unidades")
 public class Unidade implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     @Column(name="codigo")
     private Long id;
     @Column(name="nome")
     private String nome;
+
+    public Unidade(){}
+    public Unidade(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     public Long getId() {
         return id;

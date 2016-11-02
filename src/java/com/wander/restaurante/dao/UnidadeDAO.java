@@ -5,15 +5,18 @@
  */
 package com.wander.restaurante.dao;
 
+import com.wander.restaurante.entidades.Unidade;
 import java.util.Iterator;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Wanderlei
  * @param <Unidade>
  */
-public class UnidadeDAO<Unidade>  extends AbsDAO<Unidade>{
+public class UnidadeDAO  extends AbsDAO<Unidade>{
 
     @Override
     public List<Unidade> listar() {
@@ -28,8 +31,11 @@ public class UnidadeDAO<Unidade>  extends AbsDAO<Unidade>{
     }
 
     @Override
-    public Unidade pesquisar(Unidade t) {
-        return null;
+    public Unidade pesquisar(Long id) {
+     
+       Criteria crit = this.session.createCriteria(Unidade.class);
+       crit.add(Restrictions.eq("id",id));
+       return (Unidade) crit.uniqueResult();
     }
 
     
