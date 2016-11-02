@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Clientes.findByReceberPromocoes", query = "SELECT c FROM Clientes c WHERE c.receberPromocoes = :receberPromocoes"),
     @NamedQuery(name = "Clientes.findByCreatedAt", query = "SELECT c FROM Clientes c WHERE c.createdAt = :createdAt"),
     @NamedQuery(name = "Clientes.findByUpdatedAt", query = "SELECT c FROM Clientes c WHERE c.updatedAt = :updatedAt")})
-public class Clientes implements Serializable {
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -94,14 +94,14 @@ public class Clientes implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public Clientes() {
+    public Cliente() {
     }
 
-    public Clientes(Integer codigo) {
+    public Cliente(Integer codigo) {
         this.codigo = codigo;
     }
 
-    public Clientes(Integer codigo, String nome, String cpf, Date updatedAt) {
+    public Cliente(Integer codigo, String nome, String cpf, Date updatedAt) {
         this.codigo = codigo;
         this.nome = nome;
         this.cpf = cpf;
@@ -222,10 +222,10 @@ public class Clientes implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Clientes)) {
+        if (!(object instanceof Cliente)) {
             return false;
         }
-        Clientes other = (Clientes) object;
+        Cliente other = (Cliente) object;
         if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuarios.findByCreatedAt", query = "SELECT u FROM Usuarios u WHERE u.createdAt = :createdAt"),
     @NamedQuery(name = "Usuarios.findByUpdatedAt", query = "SELECT u FROM Usuarios u WHERE u.updatedAt = :updatedAt"),
     @NamedQuery(name = "Usuarios.findByPerfil", query = "SELECT u FROM Usuarios u WHERE u.perfil = :perfil")})
-public class Usuarios implements Serializable {
+public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,14 +72,14 @@ public class Usuarios implements Serializable {
     @Column(name = "perfil")
     private String perfil;
 
-    public Usuarios() {
+    public Usuario() {
     }
 
-    public Usuarios(Integer codigo) {
+    public Usuario(Integer codigo) {
         this.codigo = codigo;
     }
 
-    public Usuarios(Integer codigo, String nome, Date updatedAt) {
+    public Usuario(Integer codigo, String nome, Date updatedAt) {
         this.codigo = codigo;
         this.nome = nome;
         this.updatedAt = updatedAt;
@@ -159,10 +159,10 @@ public class Usuarios implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuarios)) {
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        Usuarios other = (Usuarios) object;
+        Usuario other = (Usuario) object;
         if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }

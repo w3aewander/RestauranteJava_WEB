@@ -3,9 +3,10 @@
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
-    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/restaurante</property>
     <property name="hibernate.connection.username">restaurante</property>
     <property name="hibernate.connection.password">restaurante</property>
+    <mapping class="com.wander.restaurante.entidades.Unidade" />
   </session-factory>
 </hibernate-configuration>

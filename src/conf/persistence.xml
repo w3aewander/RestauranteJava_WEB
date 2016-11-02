@@ -3,7 +3,13 @@
   <persistence-unit name="RestauranteWEBPU" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:app/restaurante</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.wander.restaurante.entidades.Cliente</class>
+    <class>com.wander.restaurante.entidades.Comanda</class>
+    <class>com.wander.restaurante.entidades.Endereco</class>
+    <class>com.wander.restaurante.entidades.Produto</class>
+    <class>com.wander.restaurante.entidades.Unidade</class>
+    <class>com.wander.restaurante.entidades.Usuario</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
