@@ -17,32 +17,35 @@ import org.hibernate.Transaction;
 public abstract class AbsDAO<T> implements IDAO<T> {
 
     protected Session session;
-   
+    protected Transaction trans;
+    
     public AbsDAO() {
 
         session = HibernateUtil.getSessionFactory().openSession();
-        
+        trans = session.getTransaction();
+                
     }
 
     @Override
     public void inserir(T t) {      
-       session.beginTransaction();
-       session.save(t);
-       session.getTransaction().commit();
+         
+         trans.begin();
+         session.save(t);
+         trans.commit();
     }
     
     @Override
     public void excluir(T t) {
-      session.beginTransaction();
+      trans.begin();
       session.delete(t);
-      session.getTransaction().commit();      
+      trans.commit();      
     }
 
     @Override
     public void atualizar(T t) {
-      session.beginTransaction();
+      trans.begin();
       session.merge(t);
-      session.getTransaction().commit();      
+      trans.commit();      
     }
 
 }

@@ -20,12 +20,11 @@ public class UnidadeDAO  extends AbsDAO<Unidade>{
 
     @Override
     public List<Unidade> listar() {
-       this.session.beginTransaction();
        List<Unidade> listaUnidades = this.session.createQuery("From Unidade").list();
        
-       for ( Iterator it = listaUnidades.iterator();it.hasNext();){
-           Unidade unidade = (Unidade) it.next();
-       }
+       listaUnidades.stream().forEach((unidade) -> {
+           listaUnidades.add(unidade);
+        });
        
        return listaUnidades;
     }

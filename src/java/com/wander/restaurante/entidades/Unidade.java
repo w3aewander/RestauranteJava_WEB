@@ -19,16 +19,27 @@ import javax.validation.constraints.NotNull;
  * @author Wanderlei
  */
 @Entity
-@Table(name="unidades")
-public class Unidade implements Serializable{
+@Table(name = "unidades")
+public class Unidade implements Serializable {
+
     @Id
-    @GeneratedValue()
-    @Column(name="codigo")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "codigo")
     private Long id;
-    @Column(name="nome")
+    @Column(name = "nome")
+    @NotNull
     private String nome;
 
-    public Unidade(){}
+    public Unidade() {
+    }
+
+    public Unidade (Long id){
+        this.id = id;
+    }
+    public Unidade(String nome) {
+        this.nome = nome;
+    }
+
     public Unidade(Long id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -49,5 +60,5 @@ public class Unidade implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
 }
