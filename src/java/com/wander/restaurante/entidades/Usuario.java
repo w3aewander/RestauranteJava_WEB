@@ -1,4 +1,3 @@
-
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
@@ -7,7 +6,9 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,45 +29,43 @@ import javax.validation.constraints.Size;
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo")
     private Long id;
     @NotNull
-    @Size(min = 1, max = 50)    
+    @Size(min = 1, max = 50)
     private String nome;
-    
-    @Column(name="email")
+
+    @Column(name = "email")
     private String email;
-    
+
     @Size(max = 20)
     @Column(name = "login")
     private String login;
-    
+
     @Size(max = 255)
     @Column(name = "senha")
     private String senha;
-    
+
     @Column(name = "ativo")
     private Boolean ativo;
-    
+
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     private Date created_at;
-    
+
     @NotNull
     @Column(name = "updated_at")
     @Temporal(TemporalType.DATE)
     private Date updated_at;
-    
+
     @Size(max = 20)
-    @OneToOne(cascade = CascadeType.ALL)
-    private Perfil perfil;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+    private Perfil perfil ;
+
+    @OneToOne
     private Endereco endereco;
-    
+
     public Usuario() {
         this.endereco = new Endereco();
         this.perfil = new Perfil();
@@ -76,8 +75,10 @@ public class Usuario implements Serializable {
 
     public Usuario(Long codigo) {
         this.id = codigo;
+        this.endereco = new Endereco();
+        this.perfil = new Perfil();
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -172,11 +173,12 @@ public class Usuario implements Serializable {
         this.perfil = perfil;
     }
 
+    @OneToOne
     public Endereco getEndereco() {
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-    }    
+    }
 }

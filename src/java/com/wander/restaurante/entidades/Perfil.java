@@ -6,32 +6,46 @@
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author Wanderlei
  */
 @Entity
-@Table(name="perfis")
+@Table(name = "perfis")
 public class Perfil implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="codigo")
+    @Column(name = "codigo")
     private Long id;
-    
-    @Column(name="nome")
+
+    @Column(name = "nome")
     @NotNull
     private String nome;
 
-    public Perfil(){}
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Perfil() {
+    }
+
     public Perfil(Long id) {
         this.id = id;
     }
@@ -45,14 +59,6 @@ public class Perfil implements Serializable {
         this.nome = nome;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -60,6 +66,5 @@ public class Perfil implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-         
-    
-    }
+
+}

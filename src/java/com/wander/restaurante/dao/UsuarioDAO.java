@@ -16,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class UsuarioDAO extends AbsDAO<Usuario> {
 
+    private Usuario usuario = new Usuario();
+    
     @Override
     public List<Usuario> listar() {
         return this.session.createQuery("From Usuario").list();

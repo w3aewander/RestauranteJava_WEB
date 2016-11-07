@@ -12,34 +12,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 /**
  *
  * @author Wanderlei
  */
-
 @Entity
-@Table(name="enderecos")
-public class Endereco implements Serializable{
-    
+@Table(name = "enderecos")
+public class Endereco implements Serializable {
+
+    @Column(name = "logradouro")
+    private String logradouro;
+
+   
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(name="logradouro")
-    private String logradouro;
-    
-    @Column(name="cep",length =8,nullable = false)
-    private String cep;
-    
-    private String numero,lote,quadra;
-    private String bairro,cidade,uf;
+    @Column(name = "codigo",nullable = false,insertable = true)
+    private Long Id;
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long Id) {
+        this.Id = Id;
     }
+
+    @Column(name = "cep", length = 8, nullable = false)
+    private String cep;
+
+    private String numero, lote, quadra;
+    private String bairro, cidade, uf;
 
     public String getLogradouro() {
         return logradouro;
@@ -104,5 +107,5 @@ public class Endereco implements Serializable{
     public void setUf(String uf) {
         this.uf = uf;
     }
-    
+
 }

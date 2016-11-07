@@ -32,6 +32,7 @@ public abstract class AbsDAO<T> implements IDAO<T> {
          trans.begin();
          session.save(t);
          trans.commit();
+         session.flush();
     }
     
     @Override
@@ -39,13 +40,15 @@ public abstract class AbsDAO<T> implements IDAO<T> {
       trans.begin();
       session.delete(t);
       trans.commit();      
+      session.flush();
     }
 
     @Override
     public void atualizar(T t) {
       trans.begin();
       session.merge(t);
-      trans.commit();      
+      trans.commit(); 
+      session.flush();
     }
 
 }
