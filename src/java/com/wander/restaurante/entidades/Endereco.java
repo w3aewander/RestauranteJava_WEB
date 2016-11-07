@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Endereco implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name="logradouro")
     private String logradouro;

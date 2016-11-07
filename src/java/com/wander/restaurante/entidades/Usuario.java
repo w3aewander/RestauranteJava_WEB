@@ -1,26 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,69 +26,86 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "usuarios")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
-    @NamedQuery(name = "Usuarios.findByCodigo", query = "SELECT u FROM Usuarios u WHERE u.codigo = :codigo"),
-    @NamedQuery(name = "Usuarios.findByNome", query = "SELECT u FROM Usuarios u WHERE u.nome = :nome"),
-    @NamedQuery(name = "Usuarios.findByLogin", query = "SELECT u FROM Usuarios u WHERE u.login = :login"),
-    @NamedQuery(name = "Usuarios.findBySenha", query = "SELECT u FROM Usuarios u WHERE u.senha = :senha"),
-    @NamedQuery(name = "Usuarios.findByAtivo", query = "SELECT u FROM Usuarios u WHERE u.ativo = :ativo"),
-    @NamedQuery(name = "Usuarios.findByCreatedAt", query = "SELECT u FROM Usuarios u WHERE u.createdAt = :createdAt"),
-    @NamedQuery(name = "Usuarios.findByUpdatedAt", query = "SELECT u FROM Usuarios u WHERE u.updatedAt = :updatedAt"),
-    @NamedQuery(name = "Usuarios.findByPerfil", query = "SELECT u FROM Usuarios u WHERE u.perfil = :perfil")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo")
-    private Integer codigo;
-    @Basic(optional = false)
+    private Long id;
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nome")
+    @Size(min = 1, max = 50)    
     private String nome;
+    
+    @Column(name="email")
+    private String email;
+    
     @Size(max = 20)
     @Column(name = "login")
     private String login;
+    
     @Size(max = 255)
     @Column(name = "senha")
     private String senha;
+    
     @Column(name = "ativo")
     private Boolean ativo;
+    
     @Column(name = "created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-    @Basic(optional = false)
+    @Temporal(TemporalType.DATE)
+    private Date created_at;
+    
     @NotNull
     @Column(name = "updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @Temporal(TemporalType.DATE)
+    private Date updated_at;
+    
     @Size(max = 20)
-    @Column(name = "perfil")
-    private String perfil;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private Perfil perfil;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+    
     public Usuario() {
+        this.endereco = new Endereco();
+        this.perfil = new Perfil();
+        this.created_at = Calendar.getInstance().getTime();
+        this.updated_at = this.created_at;
     }
 
-    public Usuario(Integer codigo) {
-        this.codigo = codigo;
+    public Usuario(Long codigo) {
+        this.id = codigo;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public Usuario(Integer codigo, String nome, Date updatedAt) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.updatedAt = updatedAt;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
+            return false;
+        }
+        Usuario other = (Usuario) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    @Override
+    public String toString() {
+        return "entidades.Usuarios[ codigo=" + id + " ]";
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public Long getCodigo() {
+        return id;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.id = codigo;
     }
 
     public String getNome() {
@@ -99,6 +114,14 @@ public class Usuario implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getLogin() {
@@ -125,53 +148,35 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 
-    public String getPerfil() {
+    public Perfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(String perfil) {
+    public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (codigo != null ? codigo.hashCode() : 0);
-        return hash;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entidades.Usuarios[ codigo=" + codigo + " ]";
-    }
-    
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }    
 }

@@ -17,17 +17,14 @@ public class ProdutoDAO extends AbsDAO<Produto> {
 
     @Override
     public List<Produto> listar() {
-        this.session.beginTransaction();
         List<Produto> listaProdutos = this.session.createCriteria(Produto.class).list();
-        this.session.close();
         return listaProdutos;
     }
 
     @Override
     public Produto pesquisar(Long id) {
-        this.session.beginTransaction();
+        
         Produto produto = (Produto) this.session.createCriteria(Produto.class).add(Restrictions.eq("id", id));
-        this.session.close();
         return produto;
 
     }

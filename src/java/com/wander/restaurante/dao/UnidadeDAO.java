@@ -14,7 +14,6 @@ import org.hibernate.criterion.Restrictions;
 /**
  *
  * @author Wanderlei
- * @param <Unidade>
  */
 public class UnidadeDAO  extends AbsDAO<Unidade>{
 
