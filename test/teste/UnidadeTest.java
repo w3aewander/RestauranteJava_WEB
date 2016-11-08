@@ -5,13 +5,10 @@
  */
 package teste;
 
-import com.wander.restaurante.dao.ProdutoDAO;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.wander.restaurante.dao.UnidadeDAO;
-import com.wander.restaurante.entidades.Produto;
 import com.wander.restaurante.entidades.Unidade;
-import java.util.Calendar;
 /**
  *
  * @author Wanderlei
@@ -21,7 +18,7 @@ public class UnidadeTest {
     @Test
     public void testarSeUnidadeFoiSalvaTest(){
         Unidade unidade = new Unidade(); 
-        unidade.setNome("Peça");    
+        unidade.setNome("Porção");    
         new UnidadeDAO().inserir(unidade);
     }
     @Test
@@ -31,18 +28,26 @@ public class UnidadeTest {
         assertTrue("Dúzia".equals(u.getNome()));
     }
     
+    
     @Test
     public void testarSeVaiListarUnidades(){
        
-        for(Unidade u: new UnidadeDAO().listar()){
-            System.out.println(u.getNome());
-        }
+        new UnidadeDAO().listar().stream().forEach((u) -> {
+            System.out.println(u.getId() + " - " + u.getNome());
+        });
     }
     
     @Test
     public void testarSeVaiAtualizarUnidadeTest(){
-        Unidade u = new Unidade(1L, "Peça");
+        Unidade u = new Unidade(1L, "Litro");
         new UnidadeDAO().atualizar(u);
+    }
+    
+    @Test
+    public void testarSeVaiExcluirUmaUnidade(){
+        Unidade u = new Unidade();
+        u.setId(6L);
+        new UnidadeDAO().excluir(u);
     }
     
 }

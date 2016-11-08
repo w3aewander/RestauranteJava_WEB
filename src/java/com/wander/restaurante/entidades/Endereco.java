@@ -6,46 +6,45 @@
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  *
  * @author Wanderlei
  */
-@Entity
-@Table(name = "enderecos")
 public class Endereco implements Serializable {
 
-    @Column(name = "logradouro")
+    private int Id;
     private String logradouro;
+    private String cep;
+    private Integer numero;
+    private String lote, quadra;
+    private String bairro, cidade, uf;
 
-   
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo",nullable = false,insertable = true)
-    private Long Id;
+    public Endereco() {
+    }
 
-    public Long getId() {
+    public Endereco(int id) {
+        this.Id = id;
+    }
+
+    public int getId() {
         return Id;
     }
 
-    public void setId(Long Id) {
+    public void setId(int Id) {
         this.Id = Id;
     }
 
-    @Column(name = "cep", length = 8, nullable = false)
-    private String cep;
-
-    private String numero, lote, quadra;
-    private String bairro, cidade, uf;
-
     public String getLogradouro() {
         return logradouro;
+    }
+
+    public  int getNumero() {
+        return numero;
+    }
+    
+    public void setNumero(int  n){
+        this.numero = n;
     }
 
     public void setLogradouro(String logradouro) {
@@ -58,14 +57,6 @@ public class Endereco implements Serializable {
 
     public void setCep(String cep) {
         this.cep = cep;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getLote() {
@@ -106,6 +97,33 @@ public class Endereco implements Serializable {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.Id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Endereco other = (Endereco) obj;
+        return this.Id == other.Id;
+    }
+
+    @Override
+    public String toString() {
+        return "Endereco: " + "Id=" + Id + ", logradouro=" + logradouro + ", cep=" + cep + ", lote=" + lote + ", quadra=" + quadra + ", bairro=" + bairro + ", cidade=" + cidade + ", uf=" + uf;
     }
 
 }

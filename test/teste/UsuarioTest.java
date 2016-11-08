@@ -5,9 +5,9 @@
  */
 package teste;
 
-import com.wander.restaurante.dao.EnderecoDAO;
 import com.wander.restaurante.dao.PerfilDAO;
 import com.wander.restaurante.dao.UsuarioDAO;
+import com.wander.restaurante.entidades.Endereco;
 import com.wander.restaurante.entidades.Perfil;
 import com.wander.restaurante.entidades.Usuario;
 import org.junit.Test;
@@ -27,9 +27,11 @@ public class UsuarioTest {
     public void testarSeCriouUmUsuarioComEnderecoTest() {
         usuario = new Usuario();
         
+        usuario.getPerfil().setId(1);
+        usuario.getPerfil().setNome("Admin");
         usuario.getEndereco().setCep("29032470");
         usuario.getEndereco().setLogradouro("Rua");
-        usuario.getEndereco().setNumero("91");
+        usuario.getEndereco().setNumero(91);
         usuario.getEndereco().setBairro("Santo André");
         usuario.getEndereco().setCidade("Vitória");
         usuario.getEndereco().setUf("ES");

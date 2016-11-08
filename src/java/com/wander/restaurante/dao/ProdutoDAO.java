@@ -7,7 +7,7 @@ package com.wander.restaurante.dao;
 
 import com.wander.restaurante.entidades.Produto;
 import java.util.List;
-import org.hibernate.criterion.Restrictions;
+
 
 /**
  *
@@ -17,14 +17,14 @@ public class ProdutoDAO extends AbsDAO<Produto> {
 
     @Override
     public List<Produto> listar() {
-        List<Produto> listaProdutos = this.session.createCriteria(Produto.class).list();
+        List<Produto> listaProdutos = null;
         return listaProdutos;
     }
 
     @Override
     public Produto pesquisar(Long id) {
         
-        Produto produto = (Produto) this.session.createCriteria(Produto.class).add(Restrictions.eq("id", id));
+        Produto produto = null;
         return produto;
 
     }

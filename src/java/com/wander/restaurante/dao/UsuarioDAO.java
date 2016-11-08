@@ -7,8 +7,6 @@ package com.wander.restaurante.dao;
 
 import com.wander.restaurante.entidades.Usuario;
 import java.util.List;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -20,14 +18,12 @@ public class UsuarioDAO extends AbsDAO<Usuario> {
     
     @Override
     public List<Usuario> listar() {
-        return this.session.createQuery("From Usuario").list();
+        return null;
     }
 
     @Override
-    public Usuario pesquisar(Long id) {
-        this.trans.begin();
-        Criteria criteria = this.session.createCriteria(Usuario.class);
-        return (Usuario) criteria.add(Restrictions.eq("id",id));
+    public Usuario pesquisar(Long id) {        
+        return null;
     }
     
 }

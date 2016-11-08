@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <connection id="mysql"
+         string="jdbc:mysql://localhost:3306/restaurante" 
+         dbuser="restaurante" 
+         passwd = "restaurante"
+    />    
+</config>

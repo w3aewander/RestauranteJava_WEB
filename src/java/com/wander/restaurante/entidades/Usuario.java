@@ -9,11 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,8 +35,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "codigo")
     private Long id;
+    
     @NotNull
     @Size(min = 1, max = 50)
+    @Column(name="nome")
     private String nome;
 
     @Column(name = "email")
@@ -61,10 +65,13 @@ public class Usuario implements Serializable {
     private Date updated_at;
 
     @Size(max = 20)
+    @OneToOne
+    @JoinColumn
     private Perfil perfil ;
 
     @OneToOne
-    private Endereco endereco;
+    @JoinColumn
+    private Endereco endereco ;
 
     public Usuario() {
         this.endereco = new Endereco();
@@ -73,40 +80,19 @@ public class Usuario implements Serializable {
         this.updated_at = this.created_at;
     }
 
-    public Usuario(Long codigo) {
-        this.id = codigo;
-        this.endereco = new Endereco();
-        this.perfil = new Perfil();
+    public Usuario(Long id) {
+
+        this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+    
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
-    }
-
-    @Override
-    public String toString() {
-        return "entidades.Usuarios[ codigo=" + id + " ]";
-    }
-
-    public Long getCodigo() {
+    public Long getId() {
         return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.id = codigo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -173,12 +159,36 @@ public class Usuario implements Serializable {
         this.perfil = perfil;
     }
 
-    @OneToOne
     public Endereco getEndereco() {
         return endereco;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
+            return false;
+        }
+        Usuario other = (Usuario) object;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+    }
+
+    @Override
+    public String toString() {
+        return "entidades.Usuarios[ codigo=" + id + " ]";
     }
 }
