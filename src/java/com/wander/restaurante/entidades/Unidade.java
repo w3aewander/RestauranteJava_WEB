@@ -6,28 +6,14 @@
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Wanderlei
  */
-@Entity
-@Table(name = "unidades")
 public class Unidade implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo")
     private Long id;
-    @Column(name = "nome")
-    @NotNull
     private String nome;
 
     public Unidade() {

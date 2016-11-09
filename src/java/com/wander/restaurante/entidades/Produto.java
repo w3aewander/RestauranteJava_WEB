@@ -1,71 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-/**
- *
- * @author Wanderlei
- */
-@Entity
-@Table(name = "produtos")
 public class Produto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo")
     private Long id;
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nome")
-    private String nome;
-
-    @OneToOne
+    private String descricao;
     private Unidade unidade;
-
     private Double valorUnitario;
+    private Calendar created_at;
+    private Calendar updated_at;
 
-    @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
-    private Date created_at;
-
-    @Column(name = "updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updated_at;
-
-    public Produto(Long id, String nome, Unidade unidade, Double valorUnitario) {
+    public Produto(Long id, String descricao, Unidade unidade, Double valorUnitario) {
         this.id = id;
-        this.nome = nome;
+        this.descricao = descricao;
         this.unidade = unidade;
         this.valorUnitario = valorUnitario;
-        this.created_at = Calendar.getInstance().getTime();
+        this.created_at = Calendar.getInstance();
         this.updated_at = this.created_at;
     }
 
     
     public Produto() {
         this.unidade = new Unidade();
-        this.created_at = Calendar.getInstance().getTime();
+        this.created_at = Calendar.getInstance();
         this.updated_at = this.created_at;
     }
 
@@ -77,12 +36,12 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Unidade getUnidade() {
@@ -93,19 +52,19 @@ public class Produto implements Serializable {
         this.unidade = unidade;
     }
 
-    public Date getCreated_at() {
+    public Calendar getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(Calendar created_at) {
         this.created_at = created_at;
     }
 
-    public Date getUpdated_at() {
+    public Calendar getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
+    public void setUpdated_at(Calendar updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -117,4 +76,10 @@ public class Produto implements Serializable {
         this.valorUnitario = valorUnitario;
     }
 
+    @Override
+    public String toString() {
+        return "Produto{" + "id=" + id + ", descricao=" + descricao + ", unidade=" + unidade + ", valorUnitario=" + valorUnitario + ", created_at=" + created_at + ", updated_at=" + updated_at + '}';
+    }
+
+    
 }

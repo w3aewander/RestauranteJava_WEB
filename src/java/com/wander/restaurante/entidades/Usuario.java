@@ -2,90 +2,31 @@ package com.wander.restaurante.entidades;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  *
  * @author Wanderlei
  */
-@Entity
-@Table(name = "usuarios")
 public class Usuario implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "codigo")
+  
     private Long id;
-    
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name="nome")
     private String nome;
-
-    @Column(name = "email")
     private String email;
-
-    @Size(max = 20)
-    @Column(name = "login")
     private String login;
-
-    @Size(max = 255)
-    @Column(name = "senha")
     private String senha;
-
-    @Column(name = "ativo")
     private Boolean ativo;
-
-    @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
-    private Date created_at;
-
-    @NotNull
-    @Column(name = "updated_at")
-    @Temporal(TemporalType.DATE)
-    private Date updated_at;
-
-    @Size(max = 20)
-    @OneToOne
-    @JoinColumn
+    private Calendar created_at;
+    private Calendar updated_at;
     private Perfil perfil ;
 
-    @OneToOne
-    @JoinColumn
-    private Endereco endereco ;
-
     public Usuario() {
-        this.endereco = new Endereco();
+        
         this.perfil = new Perfil();
-        this.created_at = Calendar.getInstance().getTime();
+        this.created_at = Calendar.getInstance();
         this.updated_at = this.created_at;
     }
-
-    public Usuario(Long id) {
-
-        this.id = id;
-    }
-
-    
 
     public Long getId() {
         return id;
@@ -135,19 +76,19 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public Date getCreated_at() {
+    public Calendar getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(Calendar created_at) {
         this.created_at = created_at;
     }
 
-    public Date getUpdated_at() {
+    public Calendar getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
+    public void setUpdated_at(Calendar updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -159,36 +100,34 @@ public class Usuario implements Serializable {
         this.perfil = perfil;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    
-    
-    
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "entidades.Usuarios[ codigo=" + id + " ]";
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", login=" + login + '}';
     }
+
 }
