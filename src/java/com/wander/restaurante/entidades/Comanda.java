@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.wander.restaurante.entidades;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,14 +10,22 @@ import java.util.Objects;
  * @author Wanderlei
  */
 public class Comanda {
-   
+ 
    private Long id;
-   private Produto produto;
-   private float qtde;
+   private static List<ItemConsumo> itensConsumo;
+   private String status;
    private Calendar created_at;
    private Calendar updated_at;
-
-   public Long getId() {
+   
+    public Comanda() {
+        
+        itensConsumo = new ArrayList<>();
+        this.created_at = Calendar.getInstance();
+        this.updated_at = Calendar.getInstance();
+        this.status = "aberta";
+    }
+ 
+    public Long getId() {
         return id;
     }
 
@@ -28,20 +33,8 @@ public class Comanda {
         this.id = id;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public float getQtde() {
-        return qtde;
-    }
-
-    public void setQtde(float qtde) {
-        this.qtde = qtde;
+    public List<ItemConsumo> getItensConsumo() {
+        return itensConsumo;
     }
 
     public Calendar getCreated_at() {
@@ -60,6 +53,7 @@ public class Comanda {
         this.updated_at = updated_at;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 7;
@@ -67,6 +61,14 @@ public class Comanda {
         return hash;
     }
 
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public String getStatus(){
+        return this.status;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -79,15 +81,13 @@ public class Comanda {
             return false;
         }
         final Comanda other = (Comanda) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Comanda{" + "id=" + id + ", produto=" + produto + '}';
+        return "Comanda{" + "id=" + id + "," + 
+                            created_at.getTime()     +  "}";
     }
    
    

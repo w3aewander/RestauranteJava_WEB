@@ -16,7 +16,7 @@ import java.util.Calendar;
  */
 public class Utils {
 
-    public Timestamp convertForward(Calendar value) {
+    public static Timestamp convertForward(Calendar value) {
         SimpleDateFormat format;
         format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         format.setLenient(false);
@@ -25,7 +25,6 @@ public class Utils {
         try {
             data = new Timestamp(format.parse(stringData).getTime());
         } catch (ParseException e) {
-            e.printStackTrace();
         }
         return data;
     }

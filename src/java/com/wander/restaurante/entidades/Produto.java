@@ -12,6 +12,11 @@ public class Produto implements Serializable {
     private Calendar created_at;
     private Calendar updated_at;
 
+    public Produto(Long id) {
+        this.id = id;
+    }
+
+    
     public Produto(Long id, String descricao, Unidade unidade, Double valorUnitario) {
         this.id = id;
         this.descricao = descricao;

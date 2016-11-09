@@ -55,7 +55,7 @@ public final class ProdutoTest {
     @Test
     public void testarSeVaiPesquisarUmProduto(){
         
-        System.out.println(new ProdutoDAO().pesquisar(5L).toString());
-        Assert.assertNotNull(new ProdutoDAO().pesquisar(5L));
+        System.out.println(new ProdutoDAO().pesquisar(2L).toString());
+        Assert.assertNotNull(new ProdutoDAO().pesquisar(2L));
     }
 }

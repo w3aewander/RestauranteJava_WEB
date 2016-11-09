@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
