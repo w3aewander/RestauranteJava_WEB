@@ -6,7 +6,6 @@
 package com.wander.restaurante.entidades;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 /**
  *
@@ -14,21 +13,23 @@ import java.util.Objects;
  */
 public class Pessoa {
 
-    private Long codigo;
-    private String nome;
-    private Calendar data_nasc;
-    private String sexo;
-    private String estadoCivil;
-    private String tipo_pessoa;
-    private String cpf_cnpj;
-    private Boolean receberPromocoes;
-    private String celular,fixo,tel_recado;
-    private String email,site,facebook;
-    private Boolean ativo;
-    private String obs;
-    private Calendar createdAt;
-    private Calendar updatedAt;
+    protected Long codigo;
+    protected String nome;
+    protected String tipo_pessoa;
+    protected String cpf_cnpj;
+    protected Boolean receberPromocoes;
+    protected String celular,fixo,tel_recado;
+    protected String email,site,facebook;
+    protected Boolean ativo;
+    protected String obs;
+    protected Endereco endereco;
+    protected Calendar createdAt;
+    protected Calendar updatedAt;
 
+    public Pessoa(){
+        this.endereco = new Endereco();
+    }
+    
     public Long getCodigo() {
         return codigo;
     }
@@ -43,30 +44,6 @@ public class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Calendar getData_nasc() {
-        return data_nasc;
-    }
-
-    public void setData_nasc(Calendar data_nasc) {
-        this.data_nasc = data_nasc;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(String estadoCivil) {
-        this.estadoCivil = estadoCivil;
     }
 
     public String getTipo_pessoa() {
@@ -84,15 +61,7 @@ public class Pessoa {
     public void setCpf_cnpj(String cpf_cnpj) {
         this.cpf_cnpj = cpf_cnpj;
     }
-
-    public Boolean getReceberPromocoes() {
-        return receberPromocoes;
-    }
-
-    public void setReceberPromocoes(Boolean receberPromocoes) {
-        this.receberPromocoes = receberPromocoes;
-    }
-
+    
     public String getCelular() {
         return celular;
     }
@@ -148,7 +117,13 @@ public class Pessoa {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
     public String getObs() {
         return obs;
     }
@@ -176,7 +151,8 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return "Cliente{" + "codigo=" + codigo + ", nome=" + nome + ", sexo=" + sexo + ", estadoCivil=" + estadoCivil + ", cpf=" + cpf_cnpj + '}';
+        return "Pessoa{" + "codigo=" + codigo + ", nome=" + nome  + '}';
     }
     
 }
+//

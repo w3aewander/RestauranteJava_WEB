@@ -9,6 +9,7 @@ create table if not exists clientes (
    nome varchar(50) not null,
    sexo enum('masculino','feminino'),
    data_nasc date not null,
+   estado_civil varchar(20),
    tipo_pessoa enum ('fisica','juridica') default 'fisica',
    cpf_cnpj varchar(14) not null,
    email varchar(60),
