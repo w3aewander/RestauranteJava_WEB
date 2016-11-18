@@ -17,7 +17,6 @@ public class Pessoa {
     protected String nome;
     protected String tipo_pessoa;
     protected String cpf_cnpj;
-    protected Boolean receberPromocoes;
     protected String celular,fixo,tel_recado;
     protected String email,site,facebook;
     protected Boolean ativo;
@@ -155,4 +154,3 @@ public class Pessoa {
     }
     
 }
-//
